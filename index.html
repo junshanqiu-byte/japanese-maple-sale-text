@@ -1,63 +1,233 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页 - 项目主页</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>流光幻彩 · 山秋枫树园话术体系</title>
     <style>
+        /* ===== 全局重置 ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft Yahei", sans-serif;
         }
+
         body {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 40px;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: #0b0a14;
+            /* 基底深色，渐变由容器内实现 */;
         }
+
+        /* ===== 主容器 ===== */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 1100px;
+            width: 100%;
+            border-radius: 32px;
+            padding: 44px 48px 48px;
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 40%, #16213e 100%);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
         }
-        h1 {
+
+        /* 背景装饰光晕 */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(circle at 70% 30%, rgba(108, 92, 231, 0.20), transparent 55%),
+                radial-gradient(circle at 20% 70%, rgba(0, 206, 201, 0.12), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== 所有内容置于上层 ===== */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 标题区域 ===== */
+        .header {
             text-align: center;
-            margin-bottom: 40px;
-            color: #4cd964;
+            margin-bottom: 44px;
         }
-        .page-list {
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #a78bfa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .main-title::after {
+            content: " ✦";
+            -webkit-text-fill-color: initial;
+            color: #a78bfa;
+            font-size: 28px;
+            margin-left: 4px;
+        }
+
+        .sub-title {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            letter-spacing: 6px;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        /* ===== 卡片网格 ===== */
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px;
         }
-        .page-item a {
+
+        .card-grid a {
             display: block;
-            padding: 20px;
-            background: #2d2d2d;
-            border-radius: 8px;
+            padding: 22px 12px;
+            border-radius: 16px;
             text-align: center;
-            color: #fff;
             text-decoration: none;
-            font-size: 18px;
-            transition: 0.3s;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #d4d4f0;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
         }
-        .page-item a:hover {
-            background: #4cd964;
-            color: #000;
+
+        /* 卡片内微光 */
+        .card-grid a::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(167, 139, 250, 0.06), transparent 60%);
+            pointer-events: none;
+        }
+
+        .card-grid a:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 16px 48px rgba(108, 92, 231, 0.20), inset 0 0 30px rgba(167, 139, 250, 0.05);
+            transform: translateY(-4px) scale(1.02);
+            color: #ffffff;
+        }
+
+        /* ===== 底部标签 ===== */
+        .footer-badge {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 24px;
+            font-weight: 300;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 28px 20px 32px;
+                border-radius: 24px;
+            }
+            .main-title {
+                font-size: 28px;
+            }
+            .main-title::after {
+                font-size: 22px;
+            }
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .card-grid a {
+                padding: 16px 10px;
+                font-size: 15px;
+                border-radius: 14px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 20px 14px 24px;
+                border-radius: 20px;
+            }
+            .main-title {
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+            .main-title::after {
+                font-size: 18px;
+            }
+            .sub-title {
+                font-size: 12px;
+                letter-spacing: 4px;
+            }
+            .card-grid {
+                gap: 10px;
+            }
+            .card-grid a {
+                padding: 14px 6px;
+                font-size: 13px;
+                border-radius: 12px;
+            }
+            .footer-badge {
+                font-size: 10px;
+                padding-top: 18px;
+                margin-top: 28px;
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>山秋枫树园直播间全话术体系</h1>
-        <div class="page-list">
-            <div class="page-item"><a href="1.html">共鸣话术</a></div>
-            <div class="page-item"><a href="2.html">互动话术</a></div>
-            <div class="page-item"><a href="3.html">点对点互动话术</a></div>
-            <div class="page-item"><a href="4.html">保障话术</a></div>
-            <div class="page-item"><a href="5.html">人设话术</a></div>
-            <div class="page-item"><a href="6.html">放价与收尾话术</a></div>
+        <div class="content">
+
+            <!-- ===== 标题 ===== -->
+            <div class="header">
+                <div class="main-title">流光幻彩 · 话术全集</div>
+                <div class="sub-title">山秋枫树园 直播间体系</div>
+            </div>
+
+            <!-- ===== 六个话术卡片 ===== -->
+            <div class="card-grid">
+                <a href="#">共鸣话术</a>
+                <a href="#">互动话术</a>
+                <a href="#">点对点互动</a>
+                <a href="#">保障话术</a>
+                <a href="#">人设话术</a>
+                <a href="#">放价与收尾</a>
+            </div>
+
+            <!-- ===== 底部 ===== -->
+            <div class="footer-badge">方案四 · 玻璃质感 · 幻彩渐变</div>
+
         </div>
     </div>
+
 </body>
 </html>
